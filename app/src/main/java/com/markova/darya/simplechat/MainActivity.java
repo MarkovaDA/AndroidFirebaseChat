@@ -18,10 +18,14 @@ public class MainActivity extends AppCompatActivity {
         firebaseAuth = FirebaseAuth.getInstance();
 
         if (firebaseAuth.getCurrentUser() == null) {
+            Intent loginIntent =   new Intent(this, LoginActivity.class);
+            loginIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+
             startActivityForResult(
-                    new Intent(this, LoginActivity.class),
+                    loginIntent,
                     SIGN_IN_REQUEST_CODE
             );
+
         } else {
             Toast.makeText(this,
                     getResources().getString(R.string.greeting)
@@ -39,12 +43,13 @@ public class MainActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        /*if(requestCode == SIGN_IN_REQUEST_CODE) {
+        if(requestCode == SIGN_IN_REQUEST_CODE) {
             if(resultCode == RESULT_OK) {
                 Toast.makeText(this,
                         getResources().getString(R.string.success_auth),
                         Toast.LENGTH_LONG)
                         .show();
+
                 displayChatMessages();
             } else {
                 Toast.makeText(this,
@@ -53,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
                         .show();
                 finish();
             }
-        }*/
+        }
     }
 
     private void displayChatMessages() {
