@@ -19,7 +19,7 @@ public class MainActivity extends AppCompatActivity {
 
         if (firebaseAuth.getCurrentUser() == null) {
             Intent loginIntent =   new Intent(this, LoginActivity.class);
-            loginIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            loginIntent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
 
             startActivityForResult(
                     loginIntent,
