@@ -1,0 +1,63 @@
+{
+  "project_info": {
+    "project_number": "841442692326",
+    "firebase_url": "https://simplechat-d012f.firebaseio.com",
+    "project_id": "simplechat-d012f",
+    "storage_bucket": "simplechat-d012f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:841442692326:android:c19d24faf9f3e8fb",
+        "android_client_info": {
+          "package_name": "com.markova.darya.simplechat"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "841442692326-ta134kd8bbgqh7tk1a50l04fqr25v5m4.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.markova.darya.simplechat",
+            "certificate_hash": "1d423672289da54f9527173b7f26b1f484987553"
+          }
+        },
+        {
+          "client_id": "841442692326-tnh76pidn0mkma4tm97arlr97r238mt7.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.markova.darya.simplechat",
+            "certificate_hash": "6427e9a3d012dd6e33a78d1f18301ab6c12d9cb1"
+          }
+        },
+        {
+          "client_id": "841442692326-rjglgbh2rg3r57t1iilqj37ricpoh976.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDmfrmhqzYnWnRTCygAhhqK5hIcPOtB5MY"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "841442692326-rjglgbh2rg3r57t1iilqj37ricpoh976.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
