@@ -18,8 +18,7 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class DataFormFragment extends Fragment implements View.OnClickListener {
-    Boolean isLogin;
-
+    private boolean isLogin;
     private Button btnAction;
     private TextView txtEmail;
     private TextView txtPassword;
@@ -29,12 +28,15 @@ public class DataFormFragment extends Fragment implements View.OnClickListener {
     public View onCreateView(LayoutInflater inflater,
                              ViewGroup container,
                              Bundle savedInstanceState) {
+
         View view = inflater.inflate(
                 R.layout.form_data_fragment,
                 container,
                 false);
 
-        isLogin = true;
+
+        isLogin = (getArguments() != null) ? getArguments().getBoolean("isLogin") : true;
+
         btnAction = view.findViewById(R.id.btn_user_action);
         txtEmail = view.findViewById(R.id.txt_user_email);
         txtPassword = view.findViewById(R.id.txt_user_password);
@@ -47,41 +49,66 @@ public class DataFormFragment extends Fragment implements View.OnClickListener {
 
     private void setButtonLabel() {
         String label = isLogin
-                ? getResources().getString(R.string.signup)
-                : getResources().getString(R.string.login);
+                ? getResources().getString(R.string.login)
+                : getResources().getString(R.string.signup);
+
         btnAction.setText(label);
     }
 
 
     private void signUp() {
-        String email = (txtEmail.getText() != null) ? txtEmail.getText().toString() : "";
-        String password =  (txtPassword.getText() != null) ? txtPassword.getText().toString() : "";
+        String email = getEmail();
+        String password = getPassword();
 
         if (email.isEmpty() || password.isEmpty()) {
             return;
-        } else {
-            final Activity parent = getActivity();
+        }
 
-            firebaseAuth.createUserWithEmailAndPassword(email, password)
-                .addOnCompleteListener(parent, new OnCompleteListener<AuthResult>() {
+        final Activity context = getActivity();
+
+        firebaseAuth.createUserWithEmailAndPassword(email, password)
+                .addOnCompleteListener(context, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            parent.startActivity(new Intent(getActivity(), MainActivity.class));
-                            parent.finish();
+                            context.startActivity(new Intent(getActivity(), MainActivity.class));
+                            context.finish();
                         } else {
-                            Toast.makeText(parent,
+                            Toast.makeText(context,
                                     getResources().getString(R.string.failure_sign_up),
                                     Toast.LENGTH_LONG)
                                     .show();
                         }
                     }
                 });
-        }
+
     }
 
     private void signIn() {
+        String email = getEmail();
+        String password = getPassword();
 
+        if (email.isEmpty() || password.isEmpty()) {
+            return;
+        }
+
+        final Activity context = getActivity();
+
+        firebaseAuth.signInWithEmailAndPassword(email, password)
+                .addOnCompleteListener(context, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            context.startActivity(new Intent(getActivity(), MainActivity.class));
+                            context.finish();
+                        } else {
+                            Toast.makeText(context,
+                                    getResources().getString(R.string.failure_auth),
+                                    Toast.LENGTH_LONG)
+                                    .show();
+                        }
+                    }
+                });
     }
 
     @Override
@@ -91,5 +118,13 @@ public class DataFormFragment extends Fragment implements View.OnClickListener {
         } else {
             signUp();
         }
+    }
+
+    private String getEmail() {
+        return (txtEmail.getText() != null) ? txtEmail.getText().toString() : "";
+    }
+
+    private String getPassword() {
+        return (txtPassword.getText() != null) ? txtPassword.getText().toString() : "";
     }
 }

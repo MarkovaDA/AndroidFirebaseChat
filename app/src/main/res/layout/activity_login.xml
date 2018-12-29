@@ -8,42 +8,11 @@
     android:padding="@dimen/same_padding"
     tools:context="com.markova.darya.simplechat.LoginActivity">
 
-    <EditText
-        android:id="@+id/txt_login"
+    <fragment
+        android:name="com.markova.darya.simplechat.DataFormFragment"
+        android:id="@+id/frg_login"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="20dp"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="50dp"
-        android:hint="email"
-        android:ems="10"
-        android:inputType="textEmailAddress" />
-
-    <EditText
-        android:id="@+id/txt_password"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="20dp"
-        android:layout_centerHorizontal="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="100dp"
-        android:ems="10"
-        android:hint="password"
-        android:inputType="textPassword" />
-
-    <Button
-        android:id="@+id/btn_login"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignEnd="@+id/txt_login"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="165dp"
-        android:onClick="tryLogin"
-        android:background="@android:color/transparent"
-        android:textColor="@color/colorPrimary"
-        android:text="@string/login"
-        android:layout_alignRight="@+id/txt_login" />
+        android:layout_height="match_parent" />
 
     <TextView
         android:id="@+id/lbl_no_account"
@@ -62,6 +31,5 @@
         android:background="@android:color/transparent"
         android:text="@string/signup"
         android:textColor="@color/colorAccent"
-        android:onClick="trySignUp"
-        />
+        android:onClick="onSignUpClick" />
 </RelativeLayout>

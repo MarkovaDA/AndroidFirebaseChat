@@ -1,23 +1,24 @@
 package com.markova.darya.simplechat;
 
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 public class SignUpActivity extends AppCompatActivity {
-    DataFormFragment dataFormFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
 
-        dataFormFragment = (DataFormFragment)getSupportFragmentManager()
-                .findFragmentById(R.id.frg_data_form);
+        Bundle bundle = new Bundle();
+        bundle.putBoolean("isLogin", false);
 
-        dataFormFragment.isLogin = false;
+        DataFormFragment newDataFormFragment = new DataFormFragment();
+        newDataFormFragment.setArguments(bundle);
+
+        getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.frg_signup, newDataFormFragment)
+                .commit();
     }
 }
