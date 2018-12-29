@@ -4,8 +4,11 @@ import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -25,29 +28,54 @@ public class LoginActivity extends AppCompatActivity {
         firebaseAuth = FirebaseAuth.getInstance();
         txtEmail = findViewById(R.id.txt_login);
         txtPassword = findViewById(R.id.txt_password);
+
+        if (firebaseAuth.getCurrentUser() != null) {
+            startMainActivity();
+        }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflator = getMenuInflater();
+        inflator.inflate(R.menu.sign_in_menu, menu);
+
+        return super.onCreateOptionsMenu(menu);
     }
 
     public void tryLogin(View btnLogin) {
         String email = txtEmail.getText().toString();
         String password =  txtPassword.getText().toString();
 
-        if (email == "" || password == "") {
-            return;
-        }
+        final LoginActivity context = this;
 
         firebaseAuth.signInWithEmailAndPassword(email, password)
             .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
-                    Intent backIntent = new Intent();
-                    if (task.isSuccessful()) {
-                        backIntent.putExtra("currentUser",  firebaseAuth.getCurrentUser());
-                        setResult(RESULT_OK, backIntent);
-                    } else {
-                        setResult(RESULT_CANCELED, backIntent);
-                    }
-                    finish();
+                if (task.isSuccessful()) {
+                   startMainActivity();
+                } else {
+                    Toast.makeText(context,
+                            getResources().getString(R.string.failure_auth),
+                            Toast.LENGTH_LONG)
+                            .show();
+                }
                 }
             });
+    }
+
+    public void trySignUp(View btnSignUp) {
+        startSignUpActivity();
+    }
+
+    private void startSignUpActivity() {
+        Intent signUpIntent = new Intent(this, SignUpActivity.class);
+        startActivity(signUpIntent);
+    }
+
+    private void startMainActivity() {
+        Intent mainIntent = new Intent(this, MainActivity.class);
+        startActivity(mainIntent);
+        finish();
     }
 }

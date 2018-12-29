@@ -1,64 +1,24 @@
 package com.markova.darya.simplechat;
 
-import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.widget.Toast;
+import android.view.Menu;
+import android.view.MenuInflater;
 
-import com.google.firebase.auth.FirebaseAuth;
-
+//https://code.tutsplus.com/ru/tutorials/how-to-create-an-android-chat-app-using-firebase--cms-27397
 public class MainActivity extends AppCompatActivity {
-    public int SIGN_IN_REQUEST_CODE = 10;
-    private FirebaseAuth firebaseAuth;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        firebaseAuth = FirebaseAuth.getInstance();
 
-        if (firebaseAuth.getCurrentUser() == null) {
-            Intent loginIntent =   new Intent(this, LoginActivity.class);
-            loginIntent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
-
-            startActivityForResult(
-                    loginIntent,
-                    SIGN_IN_REQUEST_CODE
-            );
-
-        } else {
-            Toast.makeText(this,
-                    getResources().getString(R.string.greeting)
-                            .concat(firebaseAuth
-                                    .getCurrentUser()
-                                    .getDisplayName()),
-                    Toast.LENGTH_LONG)
-                    .show();
-
-            displayChatMessages();
-        }
+        displayChatMessages();
     }
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-        if(requestCode == SIGN_IN_REQUEST_CODE) {
-            if(resultCode == RESULT_OK) {
-                Toast.makeText(this,
-                        getResources().getString(R.string.success_auth),
-                        Toast.LENGTH_LONG)
-                        .show();
-
-                displayChatMessages();
-            } else {
-                Toast.makeText(this,
-                        getResources().getString(R.string.failure_auth),
-                        Toast.LENGTH_LONG)
-                        .show();
-                finish();
-            }
-        }
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.sign_out_menu, menu);
+        return super.onCreateOptionsMenu(menu);
     }
 
     private void displayChatMessages() {

@@ -3,4 +3,8 @@
     <string name="greeting">Welcome</string>
     <string name="success_auth">Successfully signed in. Welcome!</string>
     <string name="failure_auth">We couldn\'t sign you in. Please try again later.</string>
+    <string name="failure_sign_up">We couldn\'t sign you up. Some error was occurred.</string>
+    <string name="no_account">No account? </string>
+    <string name="login">LOG IN</string>
+    <string name="signup">SIGN UP</string>
 </resources>

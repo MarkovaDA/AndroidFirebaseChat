@@ -33,10 +33,35 @@
         android:inputType="textPassword" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/btn_login"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
+        android:layout_alignEnd="@+id/txt_login"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="165dp"
         android:onClick="tryLogin"
-        android:text="Log in" />
+        android:background="@android:color/transparent"
+        android:textColor="@color/colorPrimary"
+        android:text="@string/login"
+        android:layout_alignRight="@+id/txt_login" />
+
+    <TextView
+        android:id="@+id/lbl_no_account"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="250dp"
+        android:text="@string/no_account" />
+
+    <Button
+        android:id="@+id/btn_sign_up"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="270dp"
+        android:background="@android:color/transparent"
+        android:text="@string/signup"
+        android:textColor="@color/colorAccent"
+        android:onClick="trySignUp"
+        />
 </RelativeLayout>
