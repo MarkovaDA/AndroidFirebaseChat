@@ -5,10 +5,16 @@
     android:id="@+id/activity_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="@dimen/same_padding"
     android:focusableInTouchMode="true"
     android:focusable="true"
     tools:context="com.markova.darya.simplechat.MainActivity">
+
+    <android.support.v7.widget.Toolbar
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/tlb_main"
+        style="@style/Toolbar">
+
+    </android.support.v7.widget.Toolbar>
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/btn_send"
@@ -22,14 +28,20 @@
         android:tint="@android:color/white"
         android:scaleType="center"
         android:src="@android:drawable/ic_menu_send"
+        app:backgroundTint="@color/colorAccent"
        />
+
     <android.support.design.widget.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_toLeftOf="@id/btn_send"
         android:layout_alignParentBottom="true"
         android:layout_alignParentStart="true"
-        android:layout_alignParentLeft="true">
+        android:layout_alignParentLeft="true"
+        android:padding="10dp"
+        android:id="@+id/textInputLayout"
+        app:backgroundTint="@color/colorAccent"
+        >
 
         <EditText
             android:layout_width="match_parent"
@@ -50,4 +62,5 @@
         android:id="@+id/list_of_messages"
         android:layout_marginBottom="16dp"
         android:layout_alignParentLeft="true" />
+
 </RelativeLayout>

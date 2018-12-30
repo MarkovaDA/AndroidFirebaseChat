@@ -1,35 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="@dimen/same_padding"
     tools:context="com.markova.darya.simplechat.LoginActivity">
+
+    <android.support.v7.widget.Toolbar
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/tlb_login"
+        style="@style/Toolbar">
+
+    </android.support.v7.widget.Toolbar>
 
     <fragment
         android:name="com.markova.darya.simplechat.DataFormFragment"
         android:id="@+id/frg_login"
+        android:layout_marginTop="100dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
-    <TextView
-        android:id="@+id/lbl_no_account"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="250dp"
-        android:text="@string/no_account" />
-
-    <Button
-        android:id="@+id/btn_sign_up"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="270dp"
-        android:background="@android:color/transparent"
-        android:text="@string/signup"
-        android:textColor="@color/colorAccent"
-        android:onClick="onSignUpClick" />
 </RelativeLayout>

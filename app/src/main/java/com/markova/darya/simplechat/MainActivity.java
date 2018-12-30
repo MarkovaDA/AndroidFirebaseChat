@@ -3,14 +3,19 @@ package com.markova.darya.simplechat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
-import android.view.MenuInflater;
+import android.support.v7.widget.Toolbar;
 
-//https://code.tutsplus.com/ru/tutorials/how-to-create-an-android-chat-app-using-firebase--cms-27397
+
 public class MainActivity extends AppCompatActivity {
+    private Toolbar toolbar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        toolbar = findViewById(R.id.tlb_main);
+        setSupportActionBar(toolbar);
 
         displayChatMessages();
     }

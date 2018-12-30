@@ -5,6 +5,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <android.support.v7.widget.Toolbar
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/tlb_sign_up"
+        style="@style/Toolbar">
+
+    </android.support.v7.widget.Toolbar>
+
     <fragment
         android:name="com.markova.darya.simplechat.DataFormFragment"
         android:id="@+id/frg_signup"
