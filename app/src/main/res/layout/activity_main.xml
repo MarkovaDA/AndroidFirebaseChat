@@ -23,7 +23,6 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="-10dp"
         android:clickable="true"
         android:tint="@android:color/white"
         android:scaleType="center"
@@ -35,32 +34,28 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_toLeftOf="@id/btn_send"
+        android:layout_marginBottom="20dp"
+        android:layout_marginLeft="5dp"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentLeft="true"
-        android:padding="10dp"
-        android:id="@+id/textInputLayout"
-        app:backgroundTint="@color/colorAccent"
-        >
+        android:id="@+id/textInputLayout">
 
         <EditText
+            android:id="@+id/input_message"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Input your message here"
-            android:id="@+id/input_message"
-        />
+            android:hint="Input your message here" />
     </android.support.design.widget.TextInputLayout>
 
     <ListView
+        android:id="@+id/list_of_messages"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true"
         android:layout_above="@id/btn_send"
-        android:dividerHeight="16dp"
-        android:divider="@android:color/transparent"
-        android:id="@+id/list_of_messages"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/tlb_main"
         android:layout_marginBottom="16dp"
-        android:layout_alignParentLeft="true" />
+        android:divider="@android:color/transparent"
+        android:dividerHeight="16dp" />
 
 </RelativeLayout>
