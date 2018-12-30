@@ -13,9 +13,14 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.FirebaseException;
+import com.google.firebase.FirebaseNetworkException;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+
+import java.io.IOException;
 
 public class DataFormFragment extends Fragment implements View.OnClickListener {
     private boolean isLogin;
@@ -41,6 +46,7 @@ public class DataFormFragment extends Fragment implements View.OnClickListener {
         txtEmail = view.findViewById(R.id.txt_user_email);
         txtPassword = view.findViewById(R.id.txt_user_password);
         firebaseAuth = FirebaseAuth.getInstance();
+
         btnAction.setOnClickListener(this);
 
         setButtonLabel();
@@ -65,23 +71,25 @@ public class DataFormFragment extends Fragment implements View.OnClickListener {
         }
 
         final Activity context = getActivity();
-
         firebaseAuth.createUserWithEmailAndPassword(email, password)
-                .addOnCompleteListener(context, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
-                            context.startActivity(new Intent(getActivity(), MainActivity.class));
-                            context.finish();
-                        } else {
-                            Toast.makeText(context,
-                                    getResources().getString(R.string.failure_sign_up),
-                                    Toast.LENGTH_LONG)
-                                    .show();
-                        }
+            .addOnCompleteListener(context, new OnCompleteListener<AuthResult>() {
+                @Override
+                public void onComplete(@NonNull Task<AuthResult> task) {
+                    if (task.isSuccessful()) {
+                        context.startActivity(new Intent(getActivity(), MainActivity.class));
+                        context.finish();
                     }
-                });
-
+                }
+            })
+            .addOnFailureListener(context, new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception exception) {
+                    Toast.makeText(context,
+                            exception.getMessage().toString(),
+                            Toast.LENGTH_LONG)
+                            .show();
+                }
+            });
     }
 
     private void signIn() {
@@ -95,20 +103,24 @@ public class DataFormFragment extends Fragment implements View.OnClickListener {
         final Activity context = getActivity();
 
         firebaseAuth.signInWithEmailAndPassword(email, password)
-                .addOnCompleteListener(context, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
-                            context.startActivity(new Intent(getActivity(), MainActivity.class));
-                            context.finish();
-                        } else {
-                            Toast.makeText(context,
-                                    getResources().getString(R.string.failure_auth),
-                                    Toast.LENGTH_LONG)
-                                    .show();
-                        }
+            .addOnCompleteListener(context, new OnCompleteListener<AuthResult>() {
+                @Override
+                public void onComplete(@NonNull Task<AuthResult> task) {
+                    if (task.isSuccessful()) {
+                        context.startActivity(new Intent(getActivity(), MainActivity.class));
+                        context.finish();
                     }
-                });
+                }
+            })
+            .addOnFailureListener(context, new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception exception) {
+                    Toast.makeText(context,
+                            exception.getMessage().toString(),
+                            Toast.LENGTH_LONG)
+                            .show();
+                }
+            });
     }
 
     @Override
