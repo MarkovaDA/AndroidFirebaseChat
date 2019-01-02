@@ -47,15 +47,15 @@
     </android.support.design.widget.TextInputLayout>
 
     <ListView
-        android:id="@+id/list_of_messages"
-        android:layout_width="match_parent"
+        android:id="@+id/list_message"
+        android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_above="@id/btn_send"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/tlb_main"
         android:layout_marginBottom="16dp"
-        android:divider="@android:color/transparent"
-        android:dividerHeight="16dp" />
+        android:divider="@color/colorSilver"
+        android:dividerHeight="1dp" />
 
 </RelativeLayout>

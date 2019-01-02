@@ -24,7 +24,7 @@ public class SignUpActivity extends AppCompatActivity {
 
         getSupportFragmentManager()
                 .beginTransaction()
-                .replace(R.id.frg_signup, newDataFormFragment)
+                .replace(R.id.frg_sign_up, newDataFormFragment)
                 .commit();
     }
 }

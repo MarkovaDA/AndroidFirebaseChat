@@ -1,5 +1,6 @@
 package com.markova.darya.simplechat;
 
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
@@ -7,8 +8,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -21,15 +22,11 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 import com.markova.darya.simplechat.model.ChatMessage;
 import com.markova.darya.simplechat.model.MessageListAdapter;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
 
-//https://www.techotopia.com/index.php/A_Firebase_Realtime_Database_List_Data_Tutorial
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     private Toolbar mainToolbar;
     private FloatingActionButton sendButton;
@@ -69,6 +66,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public boolean onPrepareOptionsMenu(Menu menu) {
         menu.getItem(0).setTitle(FirebaseAuth.getInstance().getCurrentUser().getEmail());
         return super.onPrepareOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if(item.getItemId() == R.id.item_sign_out) {
+            FirebaseAuth.getInstance().signOut();
+            startActivity(new Intent(this, LoginActivity.class));
+            finish();
+        }
+
+        return false;
     }
 
     private void displayChatMessages() {
