@@ -18,20 +18,21 @@ import com.markova.darya.simplechat.model.ChatMessage;
 
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
-    private Toolbar toolbar;
+    private Toolbar mainToolbar;
     private FloatingActionButton sendButton;
-    private TextView messageTextView;
+    private TextView messageText;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        toolbar = findViewById(R.id.tlb_main);
+        mainToolbar = findViewById(R.id.tlb_main);
         sendButton = findViewById(R.id.btn_send);
-        messageTextView = findViewById(R.id.input_message);
+        messageText = findViewById(R.id.input_message);
 
-        setSupportActionBar(toolbar);
+        setSupportActionBar(mainToolbar);
         sendButton.setOnClickListener(this);
 
         displayChatMessages();
@@ -50,24 +51,29 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void displayChatMessages() {
+        //подписаться на событие обновления
+
     }
 
     @Override
     public void onClick(View v) {
-        messageTextView.setEnabled(false);
+        messageText.setEnabled(false);
 
         FirebaseDatabase.getInstance()
                 .getReference("Message")
                 .push()
-                .setValue(new ChatMessage(messageTextView.getText().toString(),
+                .setValue(new ChatMessage(messageText.getText().toString(),
                         FirebaseAuth.getInstance()
                                 .getCurrentUser()
                                 .getEmail())
                 ).addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
+                        messageText.setEnabled(true);
+                        messageText.clearFocus();
+
                         if (task.isSuccessful()) {
-                            messageTextView.setText("");
+                            messageText.setText("");
                         } else {
                             Toast.makeText(
                                     MainActivity.this,
