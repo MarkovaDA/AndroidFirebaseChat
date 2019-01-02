@@ -1,53 +1,48 @@
 package com.markova.darya.simplechat;
 
 import android.content.Intent;
-import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
-import android.widget.TextView;
+import android.support.v7.widget.Toolbar;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class LoginActivity extends AppCompatActivity {
-    private TextView txtEmail;
-    private TextView txtPassword;
     private FirebaseAuth firebaseAuth;
+    private Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        toolbar = findViewById(R.id.tlb_login);
+        setSupportActionBar(toolbar);
+
         firebaseAuth = FirebaseAuth.getInstance();
-        txtEmail = findViewById(R.id.txt_login);
-        txtPassword = findViewById(R.id.txt_password);
+
+        if (firebaseAuth.getCurrentUser() != null) {
+            startActivity(new Intent(this, MainActivity.class));
+            finish();
+        }
     }
 
-    public void tryLogin(View btnLogin) {
-        String email = txtEmail.getText().toString();
-        String password =  txtPassword.getText().toString();
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.sign_up_menu, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
 
-        if (email == "" || password == "") {
-            return;
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if(item.getItemId() == R.id.item_sign_up) {
+            startActivity(new Intent(this, SignUpActivity.class));
         }
 
-        firebaseAuth.signInWithEmailAndPassword(email, password)
-            .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                @Override
-                public void onComplete(@NonNull Task<AuthResult> task) {
-                    Intent backIntent = new Intent();
-                    if (task.isSuccessful()) {
-                        backIntent.putExtra("currentUser",  firebaseAuth.getCurrentUser());
-                        setResult(RESULT_OK, backIntent);
-                    } else {
-                        setResult(RESULT_CANCELED, backIntent);
-                    }
-                    finish();
-                }
-            });
+        return true;
     }
+
 }
